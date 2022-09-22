@@ -1,8 +1,5 @@
 from _filters.filters import Filter
 from _modwt.modwt import MODWT
-import itertools
-import numpy as np
-import bioread
 import matplotlib.pyplot as plt
 
 
