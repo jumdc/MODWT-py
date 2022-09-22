@@ -1,7 +1,7 @@
-import sys
+
 from modwtpy.filters import Filter
 from modwtpy.modwt import MODWT
-# import matplotlib.pyplot as plt
+
 
 
 if __name__ == '__main__':
