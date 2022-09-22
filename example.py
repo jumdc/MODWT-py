@@ -1,12 +1,13 @@
-from _filters.filters import Filter
-from _modwt.modwt import MODWT
-import matplotlib.pyplot as plt
+import sys
+from modwtpy.filters import Filter
+from modwtpy.modwt import MODWT
+# import matplotlib.pyplot as plt
 
 
 if __name__ == '__main__':
 
-  
 
+    
     # Perform MODWT 
 
     # Initiate the filter
@@ -25,8 +26,8 @@ if __name__ == '__main__':
     m.plot_modwt(V, W) # plot the Wavelet and Sclaing coefficients
 
     
-    X = m.imodwt(V,W) # Inverse MODWT 
+    # X = m.imodwt(V,W) # Inverse MODWT 
 
 
-    S, D = m.mra(V, W) # Multiresolution analysis
-    m.plot_mra(S, D)
+    # S, D = m.mra(V, W) # Multiresolution analysis
+    # m.plot_mra(S, D)

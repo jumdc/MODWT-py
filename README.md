@@ -14,7 +14,8 @@ Generally the choice of filters need to be balance between two considerations :
 
 - Compute the MODWT 
 ```python
- from _modwt.modwt import MODWT
+ from modwtpy.filters import Filter
+ from modwtpy.modwt import MODWT
  test = [0.2, -0.4, -0.6, -0.5, -0.8, -0.4, -0.9, -0.2, 0.1, -0.1, 0.1, -0.7, 0.9, 0, 0.3]
  la8 = Filter('la8') # instantiate the filter
  
