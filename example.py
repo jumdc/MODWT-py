@@ -26,8 +26,8 @@ if __name__ == '__main__':
     m.plot_modwt(V, W) # plot the Wavelet and Sclaing coefficients
 
     
-    # X = m.imodwt(V,W) # Inverse MODWT 
+    X = m.imodwt(V,W) # Inverse MODWT 
 
 
-    # S, D = m.mra(V, W) # Multiresolution analysis
-    # m.plot_mra(S, D)
+    S, D = m.mra(V, W) # Multiresolution analysis
+    m.plot_mra(S, D)
