@@ -1,7 +1,9 @@
-from math import sqrt
+from cProfile import label
 import os
 import json
 import sys
+from math import sqrt
+import matplotlib.pyplot as plt
 
 class Filter: 
     """
@@ -81,3 +83,14 @@ class Filter:
         res += "\n Scaling Coefficients " + g
         return res
     
+    def plot(self):
+        """
+        plot filters coefficients
+        """
+        fig, axes = plt.subplots(2)
+        axes[0].plot(self.h, label="h filter, wavelets coefficients")
+        axes[0].legend()
+        axes[1].plot(self.g, label="g filter, scaling coefficients")
+        fig.suptitle('MODWT coefficients')
+        axes[1].legend()
+        plt.show()
