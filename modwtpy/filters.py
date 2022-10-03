@@ -1,7 +1,7 @@
-from audioop import reverse
 from math import sqrt
 import os
 import json
+import sys
 
 class Filter: 
     """
@@ -16,19 +16,19 @@ class Filter:
         scaling coefficients
     self.h : list.
         wavelet coefficients
-    
     """
-    def __init__(self, filter_name):
+    def __init__(self, filter_name, wavelets_bank_path):
         """
         Parameters
         ----------
         filter_name : str.
             name of filter. 
             Need to be choosen among : haar, db4, db6,
+        wavelets_bank_path : str.
+            path to the wavelet bank.
         """
-
         self.name = filter_name
-        with open('modwtpy/wavelets.json', 'r') as f :
+        with open(wavelets_bank_path, 'r') as f :
             self.dict = json.load(f)
         try : 
             self.g = [coef / sqrt(2)

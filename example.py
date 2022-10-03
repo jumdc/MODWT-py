@@ -1,4 +1,4 @@
-
+import os
 from modwtpy.filters import Filter
 from modwtpy.modwt import MODWT
 
@@ -7,12 +7,11 @@ from modwtpy.modwt import MODWT
 if __name__ == '__main__':
 
 
-    
     # Perform MODWT 
 
     # Initiate the filter
 
-    la8 = Filter('la8')
+    la8 = Filter('la8','modwtpy/wavelets.json')
     c2 = [0.2, -0.4, -0.6, -0.5, -0.8, -0.4, -0.9, -0.2, 0.1, -0.1, 0.1, -0.7, 0.9, 0, 0.3]
 
     

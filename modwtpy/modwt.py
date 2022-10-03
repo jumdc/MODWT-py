@@ -1,4 +1,4 @@
-from modwtpy.filters import Filter
+
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -167,7 +167,6 @@ class MODWT:
         return all_V_j_minus_1[-1]
 
     def mra(self, V, W):
-        
         D = [] 
         S = []
 
