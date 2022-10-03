@@ -1,4 +1,3 @@
-
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -100,7 +99,10 @@ class MODWT:
     
     @staticmethod
     def circular_shift(factor, data):
-        return np.roll(data, factor)
+        res = data
+        if factor is not None : 
+            np.roll(data, factor)
+        return res
         
 
     def plot_modwt(self, V, W):
