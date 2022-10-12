@@ -233,3 +233,25 @@ class MODWT:
         ax.plot(self.data, 'r')
         ax.set_xlim(0, len(self.data) - 1)
         plt.show()
+
+    @staticmethod
+    def scale_variances(N, L, W): 
+        """
+        Computes the scale variance of the wavelet filters.
+
+        Parameters 
+        ----------
+        N : int
+            size of the Time Series. 
+        L : int.
+            filter size.
+        W : list
+            wavelets coefficients
+        """
+        res = []
+        for j, W_j in enumerate(W): 
+            L_j = (2**j - 1)*(L - 1) + 1
+            M_j = N - L_j + 1 
+            v_j = (1 / M_j) * sum([w**2 for w in W_j])
+            res.append(v_j)
+        return res

@@ -18,6 +18,8 @@ class Filter:
         scaling coefficients
     self.h : list.
         wavelet coefficients
+    self.L : int.
+        length of the filter.
     """
     def __init__(self, filter_name, wavelets_bank_path):
         """
