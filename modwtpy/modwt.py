@@ -99,34 +99,58 @@ class MODWT:
     
     @staticmethod
     def circular_shift(factor, data):
+        """computes circular shift."""
         res = data
         if factor is not None : 
             res = np.roll(data, factor)
         return res
         
 
-    def plot_modwt(self, V, W):
+    def shift_V_W(self,V, W):
+        """
+        Compute circular shift for wavelet and scaling coef.
+
+        Parameters
+        ----------
+        V : list.
+            scaling coefficients.
+        W : list.
+            wavelet coefficients. 
+        """
+        V_res = []
+        W_res = []
+        for j, W_j in enumerate(W):
+            factor = self.shift_factor_H(j + 1, self.L) # make the lenght of the filter to compute automatically
+            W_j_shifted = self.circular_shift(factor, W_j)
+            W_res.append(W_j_shifted)
+        factor = self.shift_factor_G(len(W), self.L)
+        V_shifted = self.circular_shift(factor, V)  
+        V_res.extend(V_shifted)
+        return V_res, W_res
+
+    def plot_modwt(self, V, W, suptitle = ''):
         """
         Plots MODWT wavelet and scaling coefficients. 
+
+        Parameters
+        ----------
+        V : list.
+            scaling coef
+            equivalent of scale-dependant averaging.
+        W : list.
+            Wavelet coef.
+            equivalent of scale-dependent differencing.
         """
         fig, axes = plt.subplots(len(W)+2)
         axes[0].set_title("MODWT decomposition")
-        
         axes[0].set_xlim(0, len(self.data) - 1)
-
-
         for j, W_j in enumerate(W):            
             ax = axes[-j -2 ]
-            factor = self.shift_factor_H(j + 1, self.L) # make the lenght of the filter to compute automatically
-            W_j_shifted = self.circular_shift(factor, W_j)
-            ax.plot(W_j_shifted, 'g')
+            ax.plot(W_j, 'g')
             ax.set_ylabel("W%d" % (j+1))
             ax.set_xlim(0, len(self.data) - 1)
-        
         ax = axes[0]
-        factor = self.shift_factor_G(len(W), self.L)
-        V_shifted = self.circular_shift(factor, V)
-        ax.plot(V_shifted, 'm')
+        ax.plot(V, 'm')
         ax.set_ylabel("V%d" % (len(W)))
         ax.set_xlim(0, len(self.data) - 1)
 
@@ -134,6 +158,7 @@ class MODWT:
         ax.set_ylabel('ECG Signal')
         ax.plot(self.data, 'r')
         ax.set_xlim(0, len(self.data) - 1)
+        fig.suptitle(suptitle)
         plt.show()
 
     def modwt_backward(self, V, W, j):
@@ -218,11 +243,15 @@ class MODWT:
         axes[0].set_xlim(0, len(self.data) - 1)
         for j, D_j in enumerate(D):         
             ax = axes[-j -2]
-            ax.plot(D_j, 'g')
+            factor = self.shift_factor_H(j + 1, self.L) # make the lenght of the filter to compute automatically
+            D_j_shifted = self.circular_shift(factor, D_j)
+            ax.plot(D_j_shifted, 'g')
             ax.set_ylabel("D%d" % (j+1))
             ax.set_xlim(0, len(self.data) - 1)
         
         ax = axes[0]
+        factor = self.shift_factor_G(len(D), self.L)
+        S_shifted = self.circular_shift(factor, S)
         ax.plot(S, 'm')
         ax.set_ylabel("S%d" % (len(D)))
         ax.set_xlim(0, len(self.data) - 1)
