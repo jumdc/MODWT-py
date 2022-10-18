@@ -101,7 +101,7 @@ class MODWT:
     def circular_shift(factor, data):
         res = data
         if factor is not None : 
-            np.roll(data, factor)
+            res = np.roll(data, factor)
         return res
         
 
@@ -124,7 +124,7 @@ class MODWT:
             ax.set_xlim(0, len(self.data) - 1)
         
         ax = axes[0]
-        factor = self.shift_factor_G(len(W), 8)
+        factor = self.shift_factor_G(len(W), self.L)
         V_shifted = self.circular_shift(factor, V)
         ax.plot(V_shifted, 'm')
         ax.set_ylabel("V%d" % (len(W)))
@@ -217,7 +217,6 @@ class MODWT:
         
         axes[0].set_xlim(0, len(self.data) - 1)
         for j, D_j in enumerate(D):         
-            
             ax = axes[-j -2]
             ax.plot(D_j, 'g')
             ax.set_ylabel("D%d" % (j+1))
